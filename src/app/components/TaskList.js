@@ -16,16 +16,14 @@ export default function TaskList({ tasks, onToggle, onDelete }) {
   }
   return (
     <ul className="divide-y">
-      {tasks.map((task) => (
-        <li key={task.id}>
-          <TaskCard
-            id={task.id}
-            title={task.title}
-            done={task.done}
-            onToggle={onToggle}
-            onDelete={onDelete}
+     {tasks.map((task) => (
+        <TaskCard 
+          key={task.id} 
+          task={task}
+          onToggle={onToggle} 
+          onDelete={onDelete}
           />
-        </li>
+       
       ))}
     </ul>
   );

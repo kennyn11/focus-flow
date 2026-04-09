@@ -16,7 +16,7 @@ import TaskStats from './TaskStats';
 export default function TaskBoard() {
 const [tasks, setTasks] = useState(() => {
   if (typeof window === 'undefined') return [];
-  const saved = localStorage.getItem('tasks',);
+  const saved = localStorage.getItem('tasks');
   return saved ? JSON.parse(saved) : [
     { id: 't1', title: 'Buy milk', done: false },
     { id: 't2', title: 'Write tests', done: false }
@@ -28,7 +28,6 @@ const [filter, setFilter] = useState('all');
 useEffect(() => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }, [tasks]);
-const [input, setInput] = useState('');
 
 //Spread old array and add new object
 function handleAddTask(title) { const newTask = { id: crypto.randomUUID(), title, done: false };
@@ -90,5 +89,5 @@ function handleClearDone() {
         onDelete={handleDelete} 
       />
     </div>
-  );
+    );
 }
