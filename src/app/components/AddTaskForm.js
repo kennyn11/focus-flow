@@ -31,7 +31,7 @@ export default function AddTaskForm({ onAdd }) {
       />
       <button
         type="submit"
-        className="bg-green-700 text-white px-4 py-2 rounded text-sm hover:bg-green-800"
+        className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-500/20"
       >Add</button>
     </form>
   );
