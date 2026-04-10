@@ -1,3 +1,10 @@
+// ══════════════════════════════════════════════════════
+// COMPONENT: TaskBoard
+// PURPOSE:  The "brain" of the app. Owns task state,
+//           handles filtering logic, and manages CRUD
+//           operations for the task list.
+// TYPE:     Client Component ('use client')
+// ══════════════════════════════════════════════════════
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,12 +13,11 @@ import TaskList from './TaskList';
 import TaskStats from './TaskStats';
 
 export default function TaskBoard() {
-  // 1. START BLANK: We must start with an empty array [] to match the server.
+  // Empty array by default
   const [tasks, setTasks] = useState([]);
   const [hasMounted, setHasMounted] = useState(false);
   const [filter, setFilter] = useState('all');
 
-  // 2. THE MOUNT HANDSHAKE: This runs ONLY in the browser after the page loads.
   useEffect(() => {
     const saved = localStorage.getItem('tasks');
     if (saved) {
@@ -26,14 +32,13 @@ export default function TaskBoard() {
     setHasMounted(true); // Now it's safe to show the list!
   }, []);
 
-  // 3. PERSISTENCE: Save to localStorage whenever tasks change.
+  // Saves to local storage
   useEffect(() => {
     if (hasMounted) {
       localStorage.setItem('tasks', JSON.stringify(tasks));
     }
   }, [tasks, hasMounted]);
 
-  // --- HANDLERS ---
   function handleAddTask(title) {
     const newTask = { id: crypto.randomUUID(), title, done: false };
     setTasks([...tasks, newTask]);
@@ -63,11 +68,10 @@ export default function TaskBoard() {
       ? tasks.filter((t) => !t.done)
       : tasks.filter((t) => t.done);
 
-  // 4. THE GUARD: If we haven't mounted, show a simple loading shell.
   if (!hasMounted) {
     return (
       <div className="max-w-lg mx-auto p-12 text-center italic text-slate-500 animate-pulse">
-        Syncing FocusFlow...
+        Syncing...
       </div>
     );
   }
